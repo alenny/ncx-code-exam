@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Ncx.Exam.Api.Models;
 using Ncx.Exam.Api.Requests;
 using Ncx.Exam.Api.Responses;
 using Ncx.Exam.Api.Services;
@@ -42,6 +43,28 @@ namespace Ncx.Exam.Api.Controllers
             {
                 return BadRequest(new { error = "UserName or Password is incorrect" });
             }
+            return Ok(PostAuth(user));
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<ActionResult<AuthenticationResponse>> Post(RegisterRequest req)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var user = await _userService.GetUserAsync(req.UserName);
+            if (user != null)
+            {
+                return BadRequest(new Error { ErrorMessage = "User exists" });
+            }
+            user = await _userService.CreateUser(req.UserName, req.Password);
+            return Ok(PostAuth(user));
+        }
+
+        private AuthenticationResponse PostAuth(User user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var secret = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var descriptor = new SecurityTokenDescriptor
@@ -57,12 +80,12 @@ namespace Ncx.Exam.Api.Controllers
             };
             var token = tokenHandler.CreateToken(descriptor);
             var tokenText = tokenHandler.WriteToken(token);
-            return Ok(new AuthenticationResponse
+            return new AuthenticationResponse
             {
                 Id = user.Id,
                 Name = user.Name,
                 JwtToken = tokenText
-            });
+            };
         }
     }
 }

@@ -10,6 +10,7 @@ import { SigninComponent } from './signin/signin.component';
 import { AuthGuard } from './auth.guard';
 import { DetailComponent } from './detail/detail.component';
 import { CreateComponent } from './create/create.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CreateComponent } from './create/create.component';
     BooksComponent,
     SigninComponent,
     DetailComponent,
-    CreateComponent
+    CreateComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

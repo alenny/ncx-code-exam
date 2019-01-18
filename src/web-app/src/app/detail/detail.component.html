@@ -1,36 +1,32 @@
 <div *ngIf="book">
-  <h2>{{book.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{book.id}}</div>
-  <div>
-    <label>Title:
-      <input type="text" [(ngModel)]="book.title" placeholder="title" />
-    </label>
-  </div>
-  <div>
-    <label>Category:
-      <input type="text" [(ngModel)]="book.category" placeholder="category" />
-    </label>
-  </div>
-  <div>
-    <label>Price:
-      <input type="text" [(ngModel)]="book.price" placeholder="0.00" />
-    </label>
-  </div>
-  <div>
-    <label>Publish Date:
-      <input type="date" value="{{book.publishDate | date: 'yyyy-MM-dd'}}" (change)="onPublishDateChange($event)" />
-    </label>
-  </div>
-  <div>
-    <label>Rating:
-      <input type="text" [(ngModel)]="book.rating" placeholder="0.0" />
-    </label>
-  </div>
-  <div>
-    <button (click)="updateBook()">Update</button>
-    <button (click)="resetBook()">Reset</button>
-  </div>
-  <div>
-    <button routerLink="/">Back to List</button>
-  </div>
+  <h2>{{ book.title }} - Details</h2>
+  <form (ngSubmit)="updateBook()">
+    <div class="form-group">
+      <label>id: {{book.id}}</label>
+    </div>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input class="form-control" name="title" type="text" [(ngModel)]="book.title" placeholder="title" />
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <input class="form-control" name="category" type="text" [(ngModel)]="book.category" placeholder="category" />
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input class="form-control" name="price" type="text" [(ngModel)]="book.price" placeholder="0.00" />
+    </div>
+    <div class="form-group">
+      <label for="publishDate">Publish Date:</label>
+      <input class="form-control" name="publishDate" type="date" value="{{book.publishDate | date: 'yyyy-MM-dd'}}"
+        (change)="onPublishDateChange($event)" />
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <input class="form-control" name="rating" type="text" [(ngModel)]="book.rating" placeholder="0.0" />
+    </div>
+    <button class="btn btn-primary">Update</button>
+    <button type="button" class="btn btn-light" (click)="resetBook()">Reset</button>
+  </form>
 </div>
+<button class="btn btn-link" routerLink="/">Back to List</button>

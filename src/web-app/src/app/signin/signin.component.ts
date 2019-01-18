@@ -25,7 +25,6 @@ export class SigninComponent implements OnInit {
         _ => this.router.navigate(['']),
         err => {
           alert('Bad credentials');
-          this.router.navigate(['/signin']);
         });
   }
 }

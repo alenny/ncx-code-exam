@@ -23,5 +23,18 @@ namespace Ncx.Exam.Api.Services
         {
             return Task.FromResult(_context.User.FirstOrDefault(u => u.Name == userName && u.Password == password));
         }
+
+        public Task<User> GetUserAsync(string userName)
+        {
+            return Task.FromResult(_context.User.FirstOrDefault(u => u.Name == userName));
+        }
+
+        public async Task<User> CreateUser(string userName, string password)
+        {
+            var user = new User { Name = userName, Password = password };
+            await _context.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
     }
 }

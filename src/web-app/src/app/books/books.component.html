@@ -1,9 +1,11 @@
-<div *ngFor="let book of books">
-  <a routerLink="/detail/{{book.id}}">
-    <span>{{book.title}}</span>
-  </a>
-  <button (click)="deleteBook(book.id)">Delete</button>
+<h2>All Books</h2>
+<div class="card" style="width: 20rem;" *ngFor="let book of books">
+  <div class="card-body">
+    <h5 class="card-title">{{book.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Rating: {{book.rating}}</h6>
+    <a class="card-link" routerLink="/detail/{{book.id}}">Details</a>
+    <a class="card-link" routerLink="" (click)="deleteBook(book.id)">Delete</a>
+  </div>
 </div>
-<div>
-  <button routerLink="/create">Add Book</button>
-</div>
+<br />
+<button class="btn btn-primary" routerLink="/create">Add Book</button>

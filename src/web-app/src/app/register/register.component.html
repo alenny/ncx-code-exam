@@ -1,5 +1,5 @@
-<h2>Sign In</h2>
-<form (ngSubmit)="onSignin()">
+<h2>Register</h2>
+<form (ngSubmit)="onRegister()">
   <div class="form-group">
     <label for="userName">User Name:</label>
     <input type="text" class="form-control" name="userName" [(ngModel)]="userName" placeholder="e.g. Jack" />
@@ -8,6 +8,9 @@
     <label for="password">Password:</label>
     <input type="password" class="form-control" name="password" [(ngModel)]="password" />
   </div>
-  <button class="btn btn-primary">Sign In</button>
-  <button class="btn btn-link" routerLink="/register">I am a new user!</button>
+  <div class="form-group">
+    <label for="passwordConfirm">Confirm Password:</label>
+    <input type="password" class="form-control" name="passwordConfirm" [(ngModel)]="passwordConfirm" />
+  </div>
+  <button class="btn btn-primary">Register</button>
 </form>

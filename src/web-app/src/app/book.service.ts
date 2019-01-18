@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Book } from './book';
 import { AuthService } from './auth.service';
-import { GetAllBooksResponse } from './getAllBooksResponse';
+import { GetAllBooksResponse } from './getAllBooks.response';
 import { User } from './user';
 
 const bookUrl = 'http://localhost:6100/api/books';

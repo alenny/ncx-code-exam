@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthRequest } from './auth.request';
 import { User } from './user';
+import { RegisterRequest } from './register.request';
 
 const currentUserKey = "currentUser";
 
@@ -33,11 +34,29 @@ export class AuthService {
     req.password = password;
     return this.http.post<User>(authUrl, req, httpOptions)
       .pipe(
-        tap(u => localStorage.setItem(currentUserKey, JSON.stringify(u)))
+        tap(u => {
+          if (u) {
+            localStorage.setItem(currentUserKey, JSON.stringify(u));
+          }
+        })
       )
   }
 
   signout() {
     localStorage.removeItem(currentUserKey);
+  }
+
+  register(userName: string, password: string): Observable<User> {
+    let req = new RegisterRequest();
+    req.userName = userName;
+    req.password = password;
+    return this.http.post<User>(`${authUrl}/register`, req, httpOptions)
+      .pipe(
+        tap(u => {
+          if (u) {
+            localStorage.setItem(currentUserKey, JSON.stringify(u));
+          }
+        })
+      )
   }
 }

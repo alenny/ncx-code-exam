@@ -1,7 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>{{title}}</h1>
-<nav>
-  <a *ngIf="getCurrentUser()" (click)="onSignout()">Sign Out</a>
-</nav>
-<label *ngIf="getCurrentUser()">Hello, {{getCurrentUser().name}}!</label>
-<router-outlet></router-outlet>
+<div class="container">
+  <h1>{{title}}</h1>
+  <label *ngIf="!getCurrentUser()">Hi, there!</label>
+  <div *ngIf="getCurrentUser()">
+    <label>Hello, {{getCurrentUser().name}}!</label>
+    <button class="btn btn-link" (click)="onSignout()">Sign Out</button>
+  </div>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <br />
+  <label>Author: <a href="email:zhuyun.dai@gmail.com">Zhuyun Dai</a>&nbsp;&nbsp;&nbsp;&nbsp;Date: 2019-01-18</label>
+</div>

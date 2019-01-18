@@ -1,0 +1,34 @@
+<div *ngIf="book">
+  <h2>Add a New Book</h2>
+  <div>
+    <label>Title:
+      <input type="text" [(ngModel)]="book.title" placeholder="title" />
+    </label>
+  </div>
+  <div>
+    <label>Category:
+      <input type="text" [(ngModel)]="book.category" placeholder="category" />
+    </label>
+  </div>
+  <div>
+    <label>Price:
+      <input type="text" [(ngModel)]="book.price" placeholder="0.00" />
+    </label>
+  </div>
+  <div>
+    <label>Publish Date:
+      <input type="date" value="{{book.publishDate | date: 'yyyy-MM-dd'}}" (change)="onPublishDateChange($event)" />
+    </label>
+  </div>
+  <div>
+    <label>Rating:
+      <input type="text" [(ngModel)]="book.rating" placeholder="0.0" />
+    </label>
+  </div>
+  <div>
+    <button (click)="createBook()">Create</button>
+  </div>
+  <div>
+    <button routerLink="/">Back to List</button>
+  </div>
+</div>

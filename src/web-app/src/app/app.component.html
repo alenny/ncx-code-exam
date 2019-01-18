@@ -1,0 +1,7 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h1>{{title}}</h1>
+<nav>
+  <a *ngIf="getCurrentUser()" (click)="onSignout()">Sign Out</a>
+</nav>
+<label *ngIf="getCurrentUser()">Hello, {{getCurrentUser().name}}!</label>
+<router-outlet></router-outlet>

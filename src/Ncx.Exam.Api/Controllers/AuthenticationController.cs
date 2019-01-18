@@ -57,7 +57,12 @@ namespace Ncx.Exam.Api.Controllers
             };
             var token = tokenHandler.CreateToken(descriptor);
             var tokenText = tokenHandler.WriteToken(token);
-            return Ok(new AuthenticationResponse { JwtToken = tokenText });
+            return Ok(new AuthenticationResponse
+            {
+                Id = user.Id,
+                Name = user.Name,
+                JwtToken = tokenText
+            });
         }
     }
 }

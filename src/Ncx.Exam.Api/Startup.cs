@@ -18,6 +18,7 @@ using System.Text;
 using Ncx.Exam.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Ncx.Exam.Api
 {
@@ -80,6 +81,11 @@ namespace Ncx.Exam.Api
                 });
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("AppDbContext")));
+
+            // Add Swagger service
+            services.AddSwaggerGen(options =>
+                options.SwaggerDoc("v1", new Info { Title = "Ncx.Exam.Api", Version = "v1" }));
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookService, BookService>();
         }
@@ -91,13 +97,12 @@ namespace Ncx.Exam.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            // Insert Swagger middleware
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Ncx.Exam.Api v1"));
+
             app.UseCors(policyBuilder => policyBuilder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()

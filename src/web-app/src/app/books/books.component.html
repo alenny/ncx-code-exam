@@ -1,0 +1,9 @@
+<div *ngFor="let book of books">
+  <a routerLink="/detail/{{book.id}}">
+    <span>{{book.title}}</span>
+  </a>
+  <button (click)="deleteBook(book.id)">Delete</button>
+</div>
+<div>
+  <button routerLink="/create">Add Book</button>
+</div>
